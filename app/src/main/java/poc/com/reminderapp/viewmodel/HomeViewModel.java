@@ -1,4 +1,4 @@
-package poc.com.reminderapp.fragments;
+package poc.com.reminderapp.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
 

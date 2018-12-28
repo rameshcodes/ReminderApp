@@ -9,26 +9,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import poc.com.reminderapp.R;
-import poc.com.reminderapp.viewmodel.HomeViewModel;
+import poc.com.reminderapp.viewmodel.CreateReminderViewModel;
 
-public class HomeFragment extends Fragment {
+public class CreateReminderFragment extends Fragment {
 
-    private HomeViewModel mViewModel;
+    private CreateReminderViewModel mViewModel;
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    public static CreateReminderFragment newInstance() {
+        return new CreateReminderFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.home_fragment, container, false);
+        return inflater.inflate(R.layout.create_reminder_fragment, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
+        mViewModel = ViewModelProviders.of(this).get(CreateReminderViewModel.class);
         // TODO: Use the ViewModel
     }
 

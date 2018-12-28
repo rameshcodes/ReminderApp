@@ -3,4 +3,10 @@
 
     <string name="search_hint">Enter text to search</string>
     <string name="search_transition">Search Transition</string>
+
+    <string name="remind_me_to">Remind me to</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <sting name="repeat">Repeat</sting>
+
 </resources>

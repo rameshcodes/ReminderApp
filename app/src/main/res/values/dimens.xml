@@ -12,4 +12,7 @@
     <dimen name="small_font_size">12sp</dimen>
     <dimen name="micro_font_size">8sp</dimen>
 
+    <!-- UI widget dimen-->
+    <dimen name="TitleTextHeight">80dp</dimen>
+
 </resources>

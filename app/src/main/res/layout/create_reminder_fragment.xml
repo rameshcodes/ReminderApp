@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragments.CreateReminderFragment">
+
+    <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/ReminderTitleEditText"
+            android:layout_width="match_parent"
+            android:minHeight="60dp"
+            android:hint="@string/remind_me_to"
+            android:layout_height="wrap_content"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <android.support.v7.widget.AppCompatTextView
+                android:text="@string/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <android.support.v7.widget.AppCompatTextView
+                android:text="@string/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/dateFieldTextView"
+                android:text="@string/date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/timeFieldTextView"
+                android:text="@string/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</LinearLayout>
