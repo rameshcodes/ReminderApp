@@ -48,4 +48,8 @@ dependencies {
     // Room
     implementation "android.arch.persistence.room:runtime:$ARCH_COMPONENTS_VERSION"
     annotationProcessor "android.arch.persistence.room:compiler:$ARCH_COMPONENTS_VERSION"
+
+    //RXAndroid sdks
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.0'
 }

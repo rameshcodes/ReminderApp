@@ -1,5 +1,6 @@
 package poc.com.reminderapp.repository;
 
+import android.arch.lifecycle.LiveData;
 import poc.com.reminderapp.ReminderApplication;
 import poc.com.reminderapp.model.Reminder;
 import poc.com.reminderapp.persistance.AppDatabase;
@@ -18,7 +19,7 @@ public class ReminderRepository {
         executor = Executors.newSingleThreadExecutor();
     }
 
-    public List<Reminder> getReminderData() {
+    public LiveData<List<Reminder>> getReminderData() {
         return db.getReminderDao().getAll();
     }
 
