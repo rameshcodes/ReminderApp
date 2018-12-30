@@ -34,6 +34,7 @@ public class SearchRemindersFragment extends BaseFragment {
                              @Nullable Bundle savedInstanceState) {
         SearchRemindersFragmentBinding searchRemindersFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.search_reminders_fragment, container, false);
         mViewModel = ViewModelProviders.of(this).get(SearchReminderViewModel.class);
+        searchRemindersFragmentBinding.setVm(mViewModel);
         return searchRemindersFragmentBinding.getRoot();
     }
 

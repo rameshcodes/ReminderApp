@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.JobIntentService;
+import android.util.Log;
 import poc.com.reminderapp.model.Reminder;
 import poc.com.reminderapp.receiver.AlarmReceiver;
 import poc.com.reminderapp.repository.ReminderRepository;
@@ -26,12 +27,14 @@ public class ReRegisterReminderService extends JobIntentService {
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
+        Log.i("TAG","re register is called");
         ReminderRepository reminderRepository = new ReminderRepository();
         List<Reminder> reminderList = (List<Reminder>) reminderRepository.getReminderData();
         for (Reminder reminder : reminderList) {
             Calendar calendar = DateTimeUtil.toCalendar(reminder.getDateTime());
             calendar.set(Calendar.SECOND, 0);
             if (DateTimeUtil.isValidReminder(calendar)) {
+                Log.i("TAG","valid reminder : "+reminder.getTitle());
                 Intent alarmIntent = new Intent(this, AlarmReceiver.class);
                 AlarmUtil.setAlarm(this, alarmIntent, reminder.getId(), calendar);
             }

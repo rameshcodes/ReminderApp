@@ -4,11 +4,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import poc.com.reminderapp.Service.ReRegisterReminderService;
-import poc.com.reminderapp.model.Reminder;
-import poc.com.reminderapp.persistance.AppDatabase;
-import poc.com.reminderapp.persistance.DatabaseHelper;
-
-import java.util.List;
 
 public class BootReceiver extends BroadcastReceiver {
 

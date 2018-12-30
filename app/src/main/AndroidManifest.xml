@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="poc.com.reminderapp">
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
             android:allowBackup="true"
@@ -28,7 +30,9 @@
         </receiver>
         <receiver android:name=".receiver.AlarmReceiver"/>
         <receiver android:name=".receiver.DismissReceiver"/>
+        <service android:name=".Service.ReRegisterReminderService"
+        android:permission="android.permission.BIND_JOB_SERVICE"/>
 
-</application>
+    </application>
 
-        </manifest>
+</manifest>

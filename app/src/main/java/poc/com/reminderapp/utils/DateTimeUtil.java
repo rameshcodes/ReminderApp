@@ -15,14 +15,6 @@ import java.util.Locale;
 public class DateTimeUtil {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-    private static final SimpleDateFormat HOUR_24_TIME_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
-
-    private static final SimpleDateFormat DATE_AND_TIME_FORMAT = new SimpleDateFormat("yyyyMMddHHmm", Locale.getDefault());
-    private static final SimpleDateFormat DATE_AND_TIME_WITH_SECONDS_FORMAT = new SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault());
-    private static final SimpleDateFormat READABLE_DAY_MONTH_FORMAT = new SimpleDateFormat("d MMMM", Locale.getDefault());
-    private static final SimpleDateFormat READABLE_DAY_MONTH_YEAR_FORMAT = new SimpleDateFormat("d MMMM yyyy", Locale.getDefault());
-    private static final SimpleDateFormat READABLE_TIME_24_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
-    private static final SimpleDateFormat READABLE_TIME_FORMAT = new SimpleDateFormat("h:mm a", Locale.getDefault());
     private static final SimpleDateFormat READABLE_DATE_TIME_FORMAT = new SimpleDateFormat("dd-MM-YYYY hh:mm a", Locale.getDefault());
     private static final SimpleDateFormat DEVICE_DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 
@@ -96,22 +88,6 @@ public class DateTimeUtil {
     public static boolean isValidReminder(Calendar calendar){
        Calendar current=Calendar.getInstance();
        return calendar.compareTo(current)>=0;
-    }
-    public static String toStringReadableDate(Calendar calendar) {
-        java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, Locale.getDefault());
-        return dateFormat.format(calendar.getTime());
-    }
-
-    public static String toStringReadableTime(Calendar calendar, Context context) {
-        if (DateFormat.is24HourFormat(context)) {
-            return READABLE_TIME_24_FORMAT.format(calendar.getTime());
-        } else {
-            return READABLE_TIME_FORMAT.format(calendar.getTime());
-        }
-    }
-
-    public static Long toLongDateAndTime(Calendar calendar) {
-        return Long.parseLong(DATE_AND_TIME_FORMAT.format(calendar.getTime()));
     }
 
 }

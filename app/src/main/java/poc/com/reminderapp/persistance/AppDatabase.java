@@ -7,7 +7,6 @@ import poc.com.reminderapp.persistance.Dao.ReminderDao;
 
 @Database(entities = {Reminder.class}, version = AppDatabase.DB_VERSION)
 public abstract class AppDatabase extends RoomDatabase {
-
     protected static final int DB_VERSION = 1;
     public static final String DB_NAME = "reminder.db";
 

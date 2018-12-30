@@ -22,16 +22,16 @@ public class SearchReminderViewModel extends ViewModel {
     }
 
     public LiveData<List<Reminder>> getReminderList() {
-        if(remindersList == null){
+        if (remindersList == null) {
             remindersList = new MediatorLiveData<>();
         }
         return remindersList;
 
     }
 
-    public void onTextChanged(CharSequence s, int start, int before, int count)  {
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
         searchString = s.toString();
-        enableSearchButton.set(s.length() > 2);
+        enableSearchButton.set(s.length() > 0);
     }
 
     public void search() {
@@ -39,8 +39,12 @@ public class SearchReminderViewModel extends ViewModel {
         remindersList.addSource(liveData, new Observer<List<Reminder>>() {
             @Override
             public void onChanged(@Nullable List<Reminder> reminders) {
-                remindersList.getValue().clear();
-                remindersList.setValue(liveData.getValue());
+                if (remindersList.getValue() != null) {
+                    remindersList.getValue().clear();
+                }
+                if (reminders != null)
+                    remindersList.setValue(reminders);
+                noResults.set(reminders==null || reminders.isEmpty());
             }
         });
     }

@@ -5,7 +5,6 @@ import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
-import io.reactivex.Single;
 import poc.com.reminderapp.model.Reminder;
 
 import java.util.List;
@@ -26,6 +25,6 @@ public interface ReminderDao {
     Reminder getReminder(int remId);
 
 
-    @Query("SELECT * from Reminder where title like :text")
+    @Query("SELECT * from Reminder where title LIKE '%' || :text || '%'")
     LiveData<List<Reminder>> search(String text);
 }
