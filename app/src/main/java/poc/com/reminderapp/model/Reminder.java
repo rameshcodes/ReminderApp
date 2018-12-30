@@ -6,7 +6,7 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity(tableName = "Reminder")
 public class Reminder {
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey()
     @ColumnInfo
     private int id;
     @ColumnInfo

@@ -20,7 +20,7 @@ import poc.com.reminderapp.viewmodel.SearchReminderViewModel;
 
 import java.util.List;
 
-public class SearchRemindersFragment extends Fragment {
+public class SearchRemindersFragment extends BaseFragment {
 
     private SearchReminderViewModel mViewModel;
     private ReminderAdapter adapter;
@@ -51,14 +51,14 @@ public class SearchRemindersFragment extends Fragment {
     }
 
     private void initDataObserver() {
-//        mViewModel.search().observe(this, new Observer<List<Reminder>>() {
-//            @Override
-//            public void onChanged(@Nullable List<Reminder> reminders) {
-//                if (reminders != null) {
-//                    adapter.setReminderList(reminders);
-//                }
-//            }
-//        });
+        mViewModel.getReminderList().observe(this, new Observer<List<Reminder>>() {
+            @Override
+            public void onChanged(@Nullable List<Reminder> reminders) {
+                if (reminders != null) {
+                    adapter.setReminderList(reminders);
+                }
+            }
+        });
     }
 
 

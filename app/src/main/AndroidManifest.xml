@@ -17,6 +17,18 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
-</manifest>
+        <receiver
+                android:name=".receiver.BootReceiver"
+                android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".receiver.AlarmReceiver"/>
+        <receiver android:name=".receiver.DismissReceiver"/>
+
+</application>
+
+        </manifest>

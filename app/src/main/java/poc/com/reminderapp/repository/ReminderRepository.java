@@ -1,9 +1,9 @@
 package poc.com.reminderapp.repository;
 
 import android.arch.lifecycle.LiveData;
-import poc.com.reminderapp.ReminderApplication;
 import poc.com.reminderapp.model.Reminder;
 import poc.com.reminderapp.persistance.Dao.ReminderDao;
+import poc.com.reminderapp.persistance.DatabaseHelper;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -15,7 +15,7 @@ public class ReminderRepository {
     ReminderDao reminderDao;
 
     public ReminderRepository() {
-        reminderDao = ReminderApplication.getAppDatabase().getReminderDao();
+        reminderDao = DatabaseHelper.getAppDatabase().getReminderDao();
         executor = Executors.newSingleThreadExecutor();
     }
 
@@ -24,6 +24,7 @@ public class ReminderRepository {
     }
 
     public void saveReminder(final Reminder reminder) {
+
         executor.execute(new Runnable() {
             @Override
             public void run() {
@@ -33,8 +34,27 @@ public class ReminderRepository {
     }
 
     public LiveData<List<Reminder>> searchReminders(String str){
-//        return reminderDao.search(str);
-        return null;
+        return reminderDao.search(str);
     }
+
+    public void getReminder(final int id, final RepositoryListener repositoryListener){
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                Reminder reminder = reminderDao.getReminder(id);
+                if(repositoryListener!=null){
+                    repositoryListener.onSuccess(reminder);
+                }
+            }
+        });
+    }
+
+
+
+    public interface RepositoryListener{
+        public void onSuccess(Object object);
+        public void onError();
+    }
+
 
 }

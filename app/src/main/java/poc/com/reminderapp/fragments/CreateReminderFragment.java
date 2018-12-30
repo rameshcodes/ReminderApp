@@ -1,11 +1,12 @@
 package poc.com.reminderapp.fragments;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.AppCompatTextView;
@@ -15,15 +16,26 @@ import android.view.ViewGroup;
 import poc.com.reminderapp.R;
 import poc.com.reminderapp.activities.HomeActivity;
 import poc.com.reminderapp.databinding.CreateReminderFragmentBinding;
+import poc.com.reminderapp.model.Reminder;
+import poc.com.reminderapp.receiver.AlarmReceiver;
+import poc.com.reminderapp.utils.AlarmUtil;
+import poc.com.reminderapp.utils.Constants;
+import poc.com.reminderapp.utils.DateTimeUtil;
 import poc.com.reminderapp.viewmodel.CreateReminderViewModel;
 
-public class CreateReminderFragment extends Fragment implements View.OnClickListener {
+import java.util.Calendar;
+
+public class CreateReminderFragment extends BaseFragment implements View.OnClickListener {
 
     private final int TARGET=1234;
     private CreateReminderViewModel mViewModel;
 
-    public static CreateReminderFragment newInstance() {
-        return new CreateReminderFragment();
+    public static CreateReminderFragment newInstance(int newId) {
+        CreateReminderFragment createReminderFragment = new CreateReminderFragment();
+        Bundle data = new Bundle();
+        data.putInt(Constants.NEW_REMINDER_ID,newId);
+        createReminderFragment.setArguments(data);
+        return createReminderFragment;
     }
 
     @Override
@@ -31,6 +43,7 @@ public class CreateReminderFragment extends Fragment implements View.OnClickList
                              @Nullable Bundle savedInstanceState) {
         CreateReminderFragmentBinding createReminderFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.create_reminder_fragment,container,false);
         mViewModel = ViewModelProviders.of(this).get(CreateReminderViewModel.class);
+        mViewModel.setReminderID(getArguments().getInt(Constants.NEW_REMINDER_ID));
         createReminderFragmentBinding.setVm(mViewModel);
         return createReminderFragmentBinding.getRoot();
     }
@@ -39,6 +52,7 @@ public class CreateReminderFragment extends Fragment implements View.OnClickList
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initViews(view);
+        initObserver();
     }
 
     private void initViews(View root) {
@@ -54,6 +68,14 @@ public class CreateReminderFragment extends Fragment implements View.OnClickList
         dateLabelTextView.setOnClickListener(this);
     }
 
+    private void initObserver(){
+        mViewModel.getReminderObj().observe(this, new Observer<Reminder>() {
+            @Override
+            public void onChanged(@Nullable Reminder reminder) {
+                registerAlarmIntent(reminder);
+            }
+        });
+    }
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.timeFieldTextView || v.getId()==R.id.timeLabelTextView) {
@@ -86,5 +108,10 @@ public class CreateReminderFragment extends Fragment implements View.OnClickList
         mViewModel.setTime(time);
     }
 
-
+    private void registerAlarmIntent(Reminder reminder){
+        Intent alarmIntent = new Intent(getContext(), AlarmReceiver.class);
+        Calendar calendar = DateTimeUtil.toCalendar(reminder.getDateTime());
+        calendar.set(Calendar.SECOND, 0);
+        AlarmUtil.setAlarm(getContext(), alarmIntent, reminder.getId(), calendar);
+    }
 }

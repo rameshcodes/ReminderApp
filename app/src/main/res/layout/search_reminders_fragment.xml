@@ -31,7 +31,7 @@
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
-                    android:onTextChanged="@{vm::onTextChanged}"
+                    android:onTextChanged="@{vm.onTextChanged}"
                     android:background="@android:color/white"
                     android:gravity="center_vertical"
                     android:hint="@string/search_hint"

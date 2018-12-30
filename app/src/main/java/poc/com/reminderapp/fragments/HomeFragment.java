@@ -25,7 +25,7 @@ import poc.com.reminderapp.viewmodel.HomeViewModel;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends BaseFragment {
     private HomeViewModel mViewModel;
     private ReminderAdapter adapter;
     private LinearLayout searchLayout;
@@ -88,6 +88,15 @@ public class HomeFragment extends Fragment {
         fragmentTransaction.replace(R.id.container, searchFragment).addToBackStack("Search");
         fragmentTransaction.commit();
 
+    }
+
+    public int lastReminderIndex(){
+        Reminder reminder= adapter.getLastItem();
+        int index=1;
+        if(reminder!=null){
+            index+=reminder.getId();
+        }
+        return index;
     }
 
 }

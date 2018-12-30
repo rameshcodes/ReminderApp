@@ -36,6 +36,12 @@ public class ReminderAdapter extends Adapter<ReminderAdapter.ReminderViewHolder>
         reminderViewHolder.bind(reminderList.get(pos));
     }
 
+    public Reminder getLastItem(){
+        if(reminderList==null || reminderList.isEmpty()){
+            return null;
+        }
+        return reminderList.get(reminderList.size()-1);
+    }
     @Override
     public int getItemCount() {
         if (reminderList == null) {

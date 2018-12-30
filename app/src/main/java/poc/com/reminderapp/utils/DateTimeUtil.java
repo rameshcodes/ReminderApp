@@ -82,7 +82,21 @@ public class DateTimeUtil {
         }
         return "";
     }
+    public static Calendar toCalendar(String dateTime){
+        Calendar calendar= Calendar.getInstance();
+        try {
+            Date d = DEVICE_DATE_FORMAT.parse(dateTime);
+            calendar.setTime(d);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return calendar;
+    }
 
+    public static boolean isValidReminder(Calendar calendar){
+       Calendar current=Calendar.getInstance();
+       return calendar.compareTo(current)>=0;
+    }
     public static String toStringReadableDate(Calendar calendar) {
         java.text.DateFormat dateFormat = java.text.DateFormat.getDateInstance(java.text.DateFormat.FULL, Locale.getDefault());
         return dateFormat.format(calendar.getTime());
