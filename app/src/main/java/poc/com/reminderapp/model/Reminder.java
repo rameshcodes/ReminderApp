@@ -45,4 +45,26 @@ public class Reminder {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj)
+            return true;
+
+        // it checks if the argument is of the
+        // type Geek by comparing the classes
+        // of the passed argument and this object.
+        // if(!(obj instanceof Geek)) return false; ---> avoid.
+        if(obj == null || obj.getClass()!= this.getClass())
+            return false;
+
+        // type casting of the argument.
+        Reminder reminder = (Reminder) obj;
+        return (this.id == reminder.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id;
+    }
 }

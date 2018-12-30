@@ -1,7 +1,6 @@
 package poc.com.reminderapp.persistance;
 
 import android.arch.persistence.room.Room;
-import android.content.Context;
 import poc.com.reminderapp.ReminderApplication;
 
 public class DatabaseHelper {

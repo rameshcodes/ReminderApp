@@ -1,8 +1,12 @@
 package poc.com.reminderapp.Service;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.Observer;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.JobIntentService;
 import android.util.Log;
 import poc.com.reminderapp.model.Reminder;
@@ -29,12 +33,29 @@ public class ReRegisterReminderService extends JobIntentService {
     protected void onHandleWork(@NonNull Intent intent) {
         Log.i("TAG","re register is called");
         ReminderRepository reminderRepository = new ReminderRepository();
-        List<Reminder> reminderList = (List<Reminder>) reminderRepository.getReminderData();
+        final MediatorLiveData<List<Reminder>> reminderData = new MediatorLiveData<>();
+        LiveData<List<Reminder>> reminderList =  reminderRepository.getReminderData();
+        reminderData.addSource(reminderList, new Observer<List<Reminder>>() {
+            @Override
+            public void onChanged(@Nullable List<Reminder> reminders) {
+                if (reminderData.getValue() != null) {
+                    reminderData.getValue().clear();
+                }
+                if (reminders != null){
+                    Log.i("TAG","re register data fetch size: "+reminders.size());
+                    reminderData.setValue(reminders);
+                    registerReminders(reminders);
+                }
+            }
+        });
+    }
+
+    private void registerReminders(List<Reminder> reminderList){
         for (Reminder reminder : reminderList) {
             Calendar calendar = DateTimeUtil.toCalendar(reminder.getDateTime());
             calendar.set(Calendar.SECOND, 0);
             if (DateTimeUtil.isValidReminder(calendar)) {
-                Log.i("TAG","valid reminder : "+reminder.getTitle());
+                Log.i("TAG","re register valid reminder : "+reminder.getTitle());
                 Intent alarmIntent = new Intent(this, AlarmReceiver.class);
                 AlarmUtil.setAlarm(this, alarmIntent, reminder.getId(), calendar);
             }
