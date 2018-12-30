@@ -10,16 +10,16 @@ public class Reminder {
     @ColumnInfo
     private int id;
     @ColumnInfo
-    private String description;
+    private String title;
     private String dateTime;
-    private String notes;
+    private String description;
 
-    public String getDescription() {
-        return description;
+    public String getTitle() {
+        return title;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDateTime() {
@@ -30,12 +30,12 @@ public class Reminder {
         this.dateTime = dateTime;
     }
 
-    public String getNotes() {
-        return notes;
+    public String getDescription() {
+        return description;
     }
 
-    public void setNotes(String notes) {
-        this.notes = notes;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getId() {

@@ -4,15 +4,16 @@ import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import poc.com.reminderapp.model.Reminder;
 import poc.com.reminderapp.repository.ReminderRepository;
+import poc.com.reminderapp.utils.DateTimeUtil;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CreateReminderViewModel extends ViewModel {
-    private ObservableField<String> title = new ObservableField<>();
-    private ObservableField<String> notes = new ObservableField<>();
-    private ObservableField<String> time = new ObservableField<>();
-    private ObservableField<String> date = new ObservableField<>();
+    public ObservableField<String> title = new ObservableField<>();
+    public ObservableField<String> description = new ObservableField<>();
+    public ObservableField<String> time = new ObservableField<>();
+    public ObservableField<String> date = new ObservableField<>();
 
     private ReminderRepository reminderRepository = null;
 
@@ -22,15 +23,23 @@ public class CreateReminderViewModel extends ViewModel {
     }
 
     private void initDateTimeFields() {
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat tf = new SimpleDateFormat("HH:MM");
-        date.set(df.format(calendar.getTime()));
-        time.set(tf.format(calendar.getTime()));
+        date.set(DateTimeUtil.getCurrentDate());
+        time.set(DateTimeUtil.getCurrentTime());
     }
 
-    private void addReminder() {
+    public void addReminder() {
         Reminder reminder = new Reminder();
+        reminder.setTitle(title.get());
+        reminder.setDescription(description.get());
+        reminder.setDateTime(DateTimeUtil.toDateTime(date.get(),time.get()));
         reminderRepository.saveReminder(reminder);
+    }
+
+    public void setTime(String time){
+        this.time.set(time);
+    }
+
+    public void setDate(String date){
+        this.date.set(date);
     }
 }

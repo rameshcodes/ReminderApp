@@ -17,7 +17,9 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initListeners();
-        loadHomeFragment();
+        if(savedInstanceState==null) {
+            loadHomeFragment();
+        }
     }
 
     private void initListeners() {

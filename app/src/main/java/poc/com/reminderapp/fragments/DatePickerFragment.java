@@ -3,10 +3,13 @@ package poc.com.reminderapp.fragments;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.widget.DatePicker;
+import poc.com.reminderapp.utils.DateTimeUtil;
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class DatePickerFragment extends AppCompatDialogFragment
         implements DatePickerDialog.OnDateSetListener {
@@ -24,6 +27,8 @@ public class DatePickerFragment extends AppCompatDialogFragment
     }
 
     public void onDateSet(DatePicker view, int year, int month, int day) {
-        // Do something with the date chosen by the user
+        if(getTargetFragment() instanceof CreateReminderFragment){
+            ((CreateReminderFragment)getTargetFragment()).setDate(DateTimeUtil.getDateInReadableFormat(year,month,day));
+        }
     }
 }

@@ -5,10 +5,12 @@
     <string name="search_transition">Search Transition</string>
 
     <string name="remind_me_to">Remind me to</string>
-    <string name="notes">Notes if any</string>
+    <string name="description">Notes if any</string>
     <string name="date">Date</string>
     <string name="time">Time</string>
     <string name="repeat">Repeat</string>
     <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="reminder_created">Reminder created</string>
 
 </resources>

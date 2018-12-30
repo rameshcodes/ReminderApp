@@ -15,6 +15,7 @@
                 android:layout_width="match_parent"
                 android:minHeight="60dp"
                 android:hint="@string/remind_me_to"
+                android:text="@={vm.title}"
                 android:layout_height="wrap_content"/>
         <LinearLayout
                 android:layout_width="match_parent"
@@ -41,14 +42,14 @@
 
             <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/dateFieldTextView"
-                    android:text="@string/date"
+                    android:text="@={vm.date}"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
 
             <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/timeFieldTextView"
-                    android:text="@string/time"
+                    android:text="@={vm.time}"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"/>
@@ -58,10 +59,11 @@
                 android:id="@+id/NotesEditText"
                 android:layout_width="match_parent"
                 android:minHeight="100dp"
-                android:hint="@string/notes"
+                android:hint="@string/description"
+                android:text="@={vm.description}"
                 android:layout_height="wrap_content"/>
 
-        <Button
+        <android.support.v7.widget.AppCompatButton
                 android:id="@+id/saveReminder"
                 android:layout_width="wrap_content"
                 android:text="@string/save"

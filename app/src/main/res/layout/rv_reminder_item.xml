@@ -15,6 +15,7 @@
             <ImageView android:layout_width="wrap_content"
                        android:layout_height="wrap_content"
                        android:layout_marginRight="@dimen/small_margin"
+                       android:padding="@dimen/small_margin"
                        android:src="@drawable/alarm"/>
             <LinearLayout android:layout_width="0dp"
                           android:layout_weight="1"
@@ -23,27 +24,24 @@
                 <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/title_textView"
                         style="@style/NotesTitleStyle"
-                        android:text="@{reminder.description}"
+                        android:text="@{reminder.title}"
+                        android:layout_marginBottom="@dimen/small_margin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
                 <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/notes_textView"
-                        style="@style/NotesTitleStyle"
+                        style="@style/NotesDescStyle"
                         android:layout_width="match_parent"
-                        android:text="@{reminder.notes}"
+                        android:text="@{reminder.description}"
+                        android:layout_marginBottom="@dimen/small_margin"
                         android:layout_height="wrap_content"/>
                 <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/date_time_textView"
-                        style="@style/NotesTitleStyle"
+                        style="@style/NotesDateTimeStyle"
                         android:text="@{reminder.dateTime}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
             </LinearLayout>
-            <View android:layout_width="@dimen/small_margin"
-                  android:layout_height="wrap_content"
-                  android:background="@color/colorAccent">
-
-            </View>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>

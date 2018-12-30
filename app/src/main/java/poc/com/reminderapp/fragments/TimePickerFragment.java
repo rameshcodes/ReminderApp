@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
 import android.text.format.DateFormat;
 import android.widget.TimePicker;
+import poc.com.reminderapp.utils.DateTimeUtil;
 
 import java.util.Calendar;
 
@@ -23,6 +24,10 @@ public class TimePickerFragment extends AppCompatDialogFragment implements TimeP
     }
 
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        // Do something with the time chosen by the user
+
+        if(getTargetFragment() instanceof CreateReminderFragment){
+            ((CreateReminderFragment)getTargetFragment()).setTime(DateTimeUtil.getTimeInReadableFormat(hourOfDay,minute));
+        }
     }
+
 }
