@@ -37,9 +37,13 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void loadCreateReminderFragment() {
+        showBackButton();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, CreateReminderFragment.newInstance()).addToBackStack("Create").commit();
+    }
+
+    public void showBackButton(){
         createReminderFAB.setVisibility(View.GONE);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, CreateReminderFragment.newInstance()).addToBackStack("Create").commit();
     }
 
     @Override

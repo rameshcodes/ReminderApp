@@ -21,6 +21,6 @@ public interface ReminderDao {
     @Delete
     void delete(Reminder reminder);
 
-    @Query("SELECT * from Reminder where title like (:text)")
-    LiveData<List<Reminder>> search(String text);
+//    @Query("SELECT * from Reminder where title like '%(:text)%'")
+//    LiveData<List<Reminder>> search(String text);
 }

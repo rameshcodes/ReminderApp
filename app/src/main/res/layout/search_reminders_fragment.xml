@@ -1,59 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
-        <variable name="vm" type="poc.com.reminderapp.viewmodel.HomeViewModel"/>
 
         <import type="android.view.View" />
+
+        <variable
+                name="vm"
+                type="poc.com.reminderapp.viewmodel.SearchReminderViewModel" />
     </data>
-    <LinearLayout
+
+    <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            tools:context=".fragments.HomeFragment">
+            android:orientation="vertical">
 
         <LinearLayout
                 android:id="@+id/search_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
                 android:layout_margin="@dimen/medium_margin"
                 android:background="@drawable/search_box_bg"
                 android:orientation="horizontal"
                 android:transitionName="@string/search_transition">
 
-            <android.support.v7.widget.AppCompatTextView
+            <android.support.v7.widget.AppCompatEditText
                     android:id="@+id/search_editText"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="1dp"
                     android:layout_weight="1"
+                    android:onTextChanged="@{vm::onTextChanged}"
                     android:background="@android:color/white"
                     android:gravity="center_vertical"
                     android:hint="@string/search_hint"
                     android:maxLines="1"
-                    android:padding="@dimen/small_margin"
-                    android:textSize="14sp"/>
+                    android:padding="@dimen/small_margin">
+                <requestFocus />
+            </android.support.v7.widget.AppCompatEditText>
 
             <android.support.v7.widget.AppCompatImageButton
+                    enable="@{vm.enableSearchButton}"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/search_button_bg_selector"
+                    android:onClick="@{()->vm.search()}"
                     android:padding="@dimen/medium_margin"
-                    android:clickable="false"
-                    android:src="@android:drawable/ic_menu_search"/>
+                    android:src="@android:drawable/ic_menu_search" />
         </LinearLayout>
 
-
         <android.support.v7.widget.RecyclerView
-                android:id="@+id/reminderList"
-                app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                android:id="@+id/searchRecyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="match_parent"
+                android:layout_below="@id/search_layout"
+                android:layout_margin="@dimen/medium_margin"
+                android:visibility="@{vm.noResults?View.GONE:View.VISIBLE}"
+                app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
 
-        </android.support.v7.widget.RecyclerView>
-
-        <TextView
+        <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/listViewNoResultsTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -65,7 +71,11 @@
                 android:textSize="16sp"
                 android:visibility="@{vm.noResults?View.VISIBLE:View.GONE}" />
 
-    </LinearLayout>
-
-
+        <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:visibility="@{vm.showLoading?View.VISIBLE:View.GONE}" />
+    </RelativeLayout>
 </layout>
