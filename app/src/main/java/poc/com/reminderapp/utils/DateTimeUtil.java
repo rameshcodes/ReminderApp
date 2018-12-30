@@ -23,6 +23,9 @@ public class DateTimeUtil {
     private static final SimpleDateFormat READABLE_DAY_MONTH_YEAR_FORMAT = new SimpleDateFormat("d MMMM yyyy", Locale.getDefault());
     private static final SimpleDateFormat READABLE_TIME_24_FORMAT = new SimpleDateFormat("HH:mm", Locale.getDefault());
     private static final SimpleDateFormat READABLE_TIME_FORMAT = new SimpleDateFormat("h:mm a", Locale.getDefault());
+    private static final SimpleDateFormat READABLE_DATE_TIME_FORMAT = new SimpleDateFormat("dd-MM-YYYY hh:mm a", Locale.getDefault());
+    private static final SimpleDateFormat DEVICE_DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
+
 
     public static String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
@@ -64,6 +67,16 @@ public class DateTimeUtil {
             dateTime.set(Calendar.HOUR, aTime.get(Calendar.HOUR));
             dateTime.set(Calendar.MINUTE, aTime.get(Calendar.MINUTE));
             return dateTime.getTime().toString();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static String toReadableDateTime(String dateTime){
+        try {
+            Date d = DEVICE_DATE_FORMAT.parse(dateTime);
+            return READABLE_DATE_TIME_FORMAT.format(d);
         } catch (ParseException e) {
             e.printStackTrace();
         }

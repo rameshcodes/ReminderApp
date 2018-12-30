@@ -38,7 +38,7 @@
                 <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/date_time_textView"
                         style="@style/NotesDateTimeStyle"
-                        android:text="@{reminder.dateTime}"
+                        dateTime="@{reminder.dateTime}"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
             </LinearLayout>

@@ -1,6 +1,7 @@
 package poc.com.reminderapp.viewmodel;
 
 import android.arch.lifecycle.ViewModel;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import poc.com.reminderapp.model.Reminder;
 import poc.com.reminderapp.repository.ReminderRepository;
@@ -14,6 +15,7 @@ public class CreateReminderViewModel extends ViewModel {
     public ObservableField<String> description = new ObservableField<>();
     public ObservableField<String> time = new ObservableField<>();
     public ObservableField<String> date = new ObservableField<>();
+    public ObservableBoolean enableSave = new ObservableBoolean();
 
     private ReminderRepository reminderRepository = null;
 
@@ -25,6 +27,10 @@ public class CreateReminderViewModel extends ViewModel {
     private void initDateTimeFields() {
         date.set(DateTimeUtil.getCurrentDate());
         time.set(DateTimeUtil.getCurrentTime());
+    }
+
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        enableSave.set(s.length()>0);
     }
 
     public void addReminder() {

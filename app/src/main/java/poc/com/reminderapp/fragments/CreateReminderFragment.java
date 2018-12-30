@@ -43,18 +43,22 @@ public class CreateReminderFragment extends Fragment implements View.OnClickList
 
     private void initViews(View root) {
         AppCompatTextView timeTextView = root.findViewById(R.id.timeFieldTextView);
+        AppCompatTextView timeLabelTextView = root.findViewById(R.id.timeLabelTextView);
+        AppCompatTextView dateLabelTextView = root.findViewById(R.id.dateLabelTextView);
         AppCompatTextView dateTextView = root.findViewById(R.id.dateFieldTextView);
         AppCompatButton save = root.findViewById(R.id.saveReminder);
         save.setOnClickListener(this);
+        timeLabelTextView.setOnClickListener(this);
         timeTextView.setOnClickListener(this);
         dateTextView.setOnClickListener(this);
+        dateLabelTextView.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.timeFieldTextView) {
+        if (v.getId() == R.id.timeFieldTextView || v.getId()==R.id.timeLabelTextView) {
             showTimePickerDialog();
-        } else if (v.getId() == R.id.dateFieldTextView) {
+        } else if (v.getId() == R.id.dateFieldTextView || v.getId() == R.id.dateLabelTextView)  {
             showDatePickerDialog();
         } else if(v.getId()==R.id.saveReminder){
             mViewModel.addReminder();

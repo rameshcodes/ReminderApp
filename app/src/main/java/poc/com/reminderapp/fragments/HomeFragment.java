@@ -2,6 +2,7 @@ package poc.com.reminderapp.fragments;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import poc.com.reminderapp.R;
 import poc.com.reminderapp.adapter.ReminderAdapter;
+import poc.com.reminderapp.databinding.HomeFragmentBinding;
 import poc.com.reminderapp.model.Reminder;
 import poc.com.reminderapp.viewmodel.HomeViewModel;
 
@@ -28,8 +30,10 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        HomeFragmentBinding homeFragmentBinding = DataBindingUtil.inflate(inflater,R.layout.home_fragment, container, false);
         mViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
-        return inflater.inflate(R.layout.home_fragment, container, false);
+        homeFragmentBinding.setVm(mViewModel);
+        return homeFragmentBinding.getRoot();
     }
 
     @Override
