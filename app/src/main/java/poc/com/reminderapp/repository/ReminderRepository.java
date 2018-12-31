@@ -23,6 +23,18 @@ public class ReminderRepository {
             return reminderDao.getAll();
     }
 
+    public void getAllReminders(final RepositoryListener repositoryListener){
+            executor.execute(new Runnable() {
+                @Override
+                public void run() {
+                    List<Reminder> list = reminderDao.getCompleteData();
+                    if(repositoryListener!=null && list!=null&&!list.isEmpty()){
+                        repositoryListener.onSuccess(list);
+                    }
+                }
+            });
+    }
+
     public void saveReminder(final Reminder reminder) {
 
         executor.execute(new Runnable() {

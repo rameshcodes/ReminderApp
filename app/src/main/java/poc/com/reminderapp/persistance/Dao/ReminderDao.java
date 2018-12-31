@@ -15,6 +15,9 @@ public interface ReminderDao {
     @Query("SELECT * from Reminder")
     LiveData<List<Reminder>> getAll();
 
+    @Query("SELECT * from Reminder")
+    List<Reminder> getCompleteData();
+
     @Insert()
     void insertAll(Reminder... reminders);
 

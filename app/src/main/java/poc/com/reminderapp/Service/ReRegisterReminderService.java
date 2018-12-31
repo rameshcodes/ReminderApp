@@ -31,21 +31,17 @@ public class ReRegisterReminderService extends JobIntentService {
 
     @Override
     protected void onHandleWork(@NonNull Intent intent) {
-        Log.i("TAG","re register is called");
         ReminderRepository reminderRepository = new ReminderRepository();
-        final MediatorLiveData<List<Reminder>> reminderData = new MediatorLiveData<>();
-        LiveData<List<Reminder>> reminderList =  reminderRepository.getReminderData();
-        reminderData.addSource(reminderList, new Observer<List<Reminder>>() {
+        reminderRepository.getAllReminders(new ReminderRepository.RepositoryListener() {
             @Override
-            public void onChanged(@Nullable List<Reminder> reminders) {
-                if (reminderData.getValue() != null) {
-                    reminderData.getValue().clear();
-                }
-                if (reminders != null){
-                    Log.i("TAG","re register data fetch size: "+reminders.size());
-                    reminderData.setValue(reminders);
-                    registerReminders(reminders);
-                }
+            public void onSuccess(Object object) {
+                List<Reminder> reminders = (List<Reminder>) object;
+                registerReminders(reminders);
+            }
+
+            @Override
+            public void onError() {
+
             }
         });
     }

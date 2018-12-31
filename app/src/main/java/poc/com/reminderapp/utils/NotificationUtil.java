@@ -5,7 +5,6 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.NotificationCompat;
@@ -44,10 +43,6 @@ public class NotificationUtil {
         }
         long[] pattern = {0, 300, 0};
         builder.setVibrate(pattern);
-//        Intent intent = new Intent(context, DismissReceiver.class);
-//        intent.putExtra("NOTIFICATION_ID", reminder.getId());
-//        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, reminder.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        builder.addAction(R.drawable.ic_done_white_24dp, context.getString(R.string.mark_as_done), pendingIntent);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             builder.setPriority(Notification.PRIORITY_HIGH);
