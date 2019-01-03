@@ -8,8 +8,6 @@ import poc.com.reminderapp.model.Reminder;
 import poc.com.reminderapp.repository.ReminderRepository;
 import poc.com.reminderapp.utils.DateTimeUtil;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class CreateReminderViewModel extends ViewModel {
 

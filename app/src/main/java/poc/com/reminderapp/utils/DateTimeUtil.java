@@ -1,13 +1,7 @@
 package poc.com.reminderapp.utils;
 
-import android.content.Context;
-import android.text.format.DateFormat;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -15,7 +9,7 @@ import java.util.Locale;
 public class DateTimeUtil {
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
     private static final SimpleDateFormat TIME_FORMAT = new SimpleDateFormat("hh:mm a", Locale.getDefault());
-    private static final SimpleDateFormat READABLE_DATE_TIME_FORMAT = new SimpleDateFormat("dd-MM-YYYY hh:mm a", Locale.getDefault());
+    private static final SimpleDateFormat READABLE_DATE_TIME_FORMAT = new SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault());
     private static final SimpleDateFormat DEVICE_DATE_FORMAT = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
 
 
